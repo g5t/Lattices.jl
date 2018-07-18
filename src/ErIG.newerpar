@@ -1,0 +1,30 @@
+# Parfile for ErIG spinwaves
+# Any line starting with # is considered a comment and is ignored
+# The order of the non-comment lines is important
+#
+# Spacegroup number (this could be a string instead, eg P213 or I4/mmm)
+142
+# lattice parameters a,b,c (ångstrom) α,β,γ (degrees)
+12.3322 12.3322 12.3322 90. 90. 90.
+# number of symmetry unique atoms in the unit cell 
+8
+#symmetry unique atoms as [atom rᵃ rᵇ rᶜ µᵃ µᵇ µᶜ anisotropy] 
+# atom can be ([Atomic Number])[Element Symbol]([Ionization]), e.g. 2H1+ for a duterium nucleus
+# only the [Element Symbol] is required, [Ionization] should be included for magnetic-formfactors
+# and [Atomic Number] should be included for isotope-specific scattering lengths.
+Fe3+  0.       0.       0.      1. 0. 0.   4.0  0. 
+Fe3+  0.       0.25     0.375   1. 0. 0.  -4.1  0. 
+Fe3+  0.375    0.       0.25    1. 0. 0.  -4.1  0. 
+O2-  -0.02689  0.05745  0.15063 1. 0. 0.   0.   0. 
+O2-   0.15063 -0.02689  0.05745 1. 0. 0.   0.   0. 
+O2-   0.05745  0.15063 -0.02689 1. 0. 0.   0.   0. 
+Er3+  0.       0.25     0.125   1. 0. 0.   6.9  0. 
+Er3+  0.125    0.       0.25    1. 0. 1.68 3.97 0. 
+# min and max exchange distances in ånstrom, number of cells in each direction to search [defaults: 0 Inf 1]
+0 5.75 1
+# # Jsaf   # Jsfm   # Jwaf   # Jwfm   # Joo   the exchange values in increasing distance order
+  11.6334 -13.5292  0.41363 -3.61928  7.84177 
+# reciprocal lattice orienting vectors (first along beam, x; second within horizontal plane, y; third vertical, z)
+1. 1. 0.
+0. 0. 1.
+1. -1. 0.

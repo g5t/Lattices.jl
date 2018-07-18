@@ -1,0 +1,41 @@
+# Any line starting with # is considered a comment and is ignored
+#
+# Parameters on a line by themselves can be specified by just their value 
+# (or the result of any valid simple Julia expression) they can also be
+# specified by assigning their parameter name, i.e., ParameterName = 15;
+# Parameter names in comments are specified in double square brackets.
+#
+# [[group]] Spacegroup number (this could be a string instead, eg "P213" or "I4/mmm") 
+group = 142;
+# [[latticeparameters]] lattice parameters a,b,c (ångstrom) α,β,γ (degrees)
+[12.3322 12.3322 12.3322 90. 90. 90.]
+# [[numberofatoms]] number of symmetry unique atoms in the unit cell 
+8
+# List of symmetry unique atoms, one per line.
+# [[atom]], [[position]], [[moment]], [[anisotropy]], [[occupancy]]
+# of which only "atom" is absolutely required as all other properties have default values.
+# atom can be ([Atomic Number])[Element Symbol]([Ionization]), e.g. 2H1+ for a duterium nucleus
+# only the [Element Symbol] is required, [Ionization] should be included for magnetic-formfactors
+# and [Atomic Number] should be included for isotope-specific scattering lengths.
+# Defaults:
+#   [[position]]   = [0 0 0]
+#   [[moment]]     = [0 0 0]
+#   [[anisotropy]] = 0
+#   [[occupancy]]  = 1
+atom="Fe3+"; position=[ 0.       0.       0.     ]; moment=[0. 0.   4.0 ]; 
+atom="Fe3+"; position=[ 0.       0.25     0.375  ]; moment=[0. 0.  -4.1 ];
+atom="Fe3+"; position=[ 0.375    0.       0.25   ]; moment=[0. 0.  -4.1 ];
+atom="O2-";  position=[-0.02689  0.05745  0.15063];
+atom="O2-";  position=[ 0.15063 -0.02689  0.05745];
+atom="O2-";  position=[ 0.05745  0.15063 -0.02689];
+atom="Er3+"; position=[ 0.       0.25     0.125  ]; moment=[0. 0.   6.9 ]; 
+atom="Er3+"; position=[ 0.125    0.       0.25   ]; moment=[0. 1.68 3.97];
+#
+# [[mindist]] minimum and [[maxdist]] maximum exchange distances in ånstrom,
+# and [[numberofcells]] number of cells in each direction to search [defaults: 0 Inf 1]
+mindist=0; maxdist=5.75; numberofcells=1;
+# [[exchanges]] # Jsaf   # Jsfm   # Jwaf   # Jwfm   # Joo   the exchange values in increasing distance order
+exchanges=[11.6334 -13.5292  0.41363 -3.61928  7.84177];
+# reciprocal lattice orienting vectors 
+# first along beam, [[x]]; second within horizontal plane, [[y]]; third vertical, [[z]]
+x=[1. 1. 0.]; y=[0. 0. 1.]; z=[1. -1. 0.];

@@ -1,0 +1,14 @@
+#!/bin/bash
+outfile="${1%.*}.dict"
+echo "const symbol2no = Dict( (" > $outfile
+#cat $1 | sed "s/−/-/g" | sed -r "s/([0-9,\.]+)\s/\1,\t/g" | sed "s/^\([a-z,A-Z,0-9,-,\+]*\)\s*\(.*\)$/(:\"\1\",\t\t[\2]),/" | column -t >> $1.dict
+cat $1 | sed "s/\s//g" | sed -r "s/^([0-9]+)(.*):(.*)/(:\"\2\", \1),/" >> $outfile
+sed -i "$ s/.$/ ) )/" $outfile
+echo "" >> $outfile
+echo "const no2gens = [" >> $outfile
+cat $1 | sed "s/\s//g" | sed -r "s/^([0-9]+)(.*):(.*)/\"\3\",/" >> $outfile
+sed -i "$ s/.$/]/" $outfile
+echo "" >> $outfile
+echo "const no2symbol = [" >> $outfile
+cat $1 | sed -r 's/^\s*//' | sed 's/  */ /g'| sed -r 's/^(.*):.*$/\1/' | sed $'s/-\([1-9]\)/\\1\u0305/g' | sed $'s/ \([0-9]\)1/ \\1\u2081/g' | sed $'s/ \([0-9]\)2/ \\1\u2082/g' |sed $'s/ \([0-9]\)3/ \\1\u2083/g' | sed $'s/ \([0-9]\)4/ \\1\u2084/g' | sed $'s/ \([0-9]\)5/ \\1\u2085/g' | sed -r "s/^([0-9])+\s+(.*)\s/\"\2\",/" >> $outfile
+sed -i "$ s/.$/]/" $outfile

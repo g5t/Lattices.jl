@@ -1,0 +1,10 @@
+#!/bin/bash
+#echo "$1 = Dict( (" > $1.dict
+##sed -n "/table border=4/,/table/p" $1 | sed -r -e 's/---/NaN/g' -e 's/\((.*) a\)/\1/g' -e 's/([0-9])i /\1im /g' -e 's|\(\+/-\)||g' -e 's|<i>i</i>|im|g' | lynx -dump -stdin |sed -e "s/^\s*//" -e "/^Neutron/d" -e "/^Isotope/d" | sed "s/^\([a-z,A-Z,0-9,-,\+]*\)\s*\(.*\)$/(:\"\1\",\t\t[\2]),/" | column -t >> $1.dict
+##sed -n "/table border=4/,/table/p" $1| lynx -dump --width=1024 -stdin |sed -r -e 's/---/NaN/g' -e 's/\((.*) a\)/\1/g' -e 's/([0-9])i /\1im /g' -e 's|\(\+/-\)||g' -e "s/^\s*//" -e "/^Neutron/d" -e "/^Isotope/d" -e "s/\([0-9\.]*\)//g" | sed "s/^\([a-z,A-Z,0-9,-,\+]*\)\s*\(.*\)$/(:\"\1\",\t\t[\2]),/" | column -t >> $1.dict
+#sed -n "/table border=4/,/table/p" $1| lynx -dump --width=1024 -stdin |sed -r -e 's/---/NaN/g' -e 's/\((.*) a\)/\1/g' -e 's/([0-9])i /\1im /g' -e 's|\(\+/-\)||g' -e "s/^\s*//" -e "/^Neutron/d" -e "/^Isotope/d" -e "s/\([0-9\.]*\)//g" -e "s/^([a-z,A-Z,0-9,-,\+]*)\s*(.*)$/(:\"\1\",\t\t[\2]),/" | column -t >> $1.dict
+#sed -i "$ s/.$/ ) )/" $1.dict
+
+echo "nistlist = Dict( (" > nist.dict
+wget -q https://www.ncnr.nist.gov/resources/n-lengths/list.html -O- | sed -n "/table border=4/,/table/p" $1| lynx -dump --width=1024 -stdin |sed -r -e 's/---/NaN/g' -e 's/\((.*) a\)/\1/g' -e 's/([0-9])i /\1im /g' -e 's|\(\+/-\)||g' -e "s/^\s*//" -e "/^Neutron/d" -e "/^Isotope/d" -e "s/\([0-9\.]*\)//g" -e "s/^([a-z,A-Z,0-9,-,\+]*)\s*(.*)$/(:\"\1\",\t\t[\2]),/" -e "s/<//g" | column -t >> nist.dict
+sed -i "$ s/.$/ ) )/" nist.dict
